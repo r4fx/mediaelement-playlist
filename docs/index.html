@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MediaElement.js Playlist</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    
+    <link rel="stylesheet" href="https://rawgit.com/r4fx/mate/master/dist/assets/styles/mate.min.css">
+    <link rel="stylesheet" href="https://rawgit.com/mediaelement/mediaelement/master/build/mediaelementplayer.min.css">
+    <link rel="stylesheet" href="../src/styles/css/mep-feature-playlist.css">
+    
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="https://rawgit.com/mediaelement/mediaelement/master/build/mediaelement-and-player.min.js"></script>
+    <script src="../src/mep-feature-playlist.js"></script>
+</head>
+<body>
+    <main class="box margin-bottom--x2">
+        <h1>MediaElement.js Playlist Plugin</h1>
+        <section>
+            <h2>Video playlist</h2>
+            <video class="mediaElementPlaylist" data-showplaylist="true" width="640" height="360" preload="none" controls poster="assets/images/big_buck_bunny.jpg">
+                <source src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" type="video/mp4" title="Big Buck Bunny" data-mep-description="mp4 file">
+                <source src="https://www.youtube.com/watch?v=twYp6W6vt2U" type="video/mp4" title="Lego Star Wars Reviews" data-mep-description="from Youtube">
+                <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4" title="Ocean">
+            </video>
+        </section>
+        
+        <section>
+            <h2>Audio playlist</h2>
+            <audio class="mediaElementPlaylist" data-showplaylist="true" preload="none" controls>
+                <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3" title="Ashbory Bass" data-mep-description="Sample from ''Ain't Misbehavin'' (Courtesy of Tantara Records)">
+                <source src="https://api.soundcloud.com/tracks/323195515/stream?client_id=95f22ed54a5c297b1c41f72d713623ef" type="audio/mp3" title="Soundcloud" data-mep-description="source streamed from soundcloud">
+                <source src="http://db3.indexcom.com/bucket/ram/00/05/64k/05.m3u8" type="audio/mp3" title="Demo HLS">
+            </audio>
+        </section>
+    </main>
+    
+    <footer class="box">
+        <hr>
+        <ul class="list-inline inline-center">
+            <li>
+                <a href="https://r4fx.github.io/mediaelement-playlist/" class="link-neutral"><span class="icon-github"></span> GitHub</a>
+            </li>
+        </ul>
+    </footer>
+
+    <script>
+        if ($.fn.mediaelementplayer) {
+            $('audio.mediaElementPlaylist').mediaelementplayer({
+                audioWidth: '100%',
+                alwaysShowControls: true,
+                error: function (media, node) {
+                    $(media).parents('.mediaElementPlaylist').addClass('playlist_cannotplay');
+                },
+                features: ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'playlist', 'current', 'progress', 'duration', 'volume']
+            });
+
+            $('video.mediaElementPlaylist').mediaelementplayer({
+                stretching: 'responsive',
+                playlistposition: 'bottom',
+                alwaysShowControls: false,
+                alwaysShowPlaylist: true,
+                features: ['playlistfeature', 'prevtrack', 'playpause', 'nexttrack', 'loop', 'playlist', 'current', 'progress', 'duration', 'volume', 'fullscreen']
+            });
+        }
+    </script>
+</body>
+</html>
